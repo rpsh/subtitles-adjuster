@@ -1,0 +1,33 @@
+{
+  "name": "subtitles-adjuster",
+  "version": "1.0.0",
+  "description": "Auto adjust the timeline of bilingual subtitles with the base subtitles. (根据基准字幕自动校正中英双语字幕的时间轴)",
+  "main": "index.js",
+  "scripts": {},
+  "author": "rpsh",
+  "bin": {
+    "subtitles-adjuster": "bin/index.js"
+  },
+  "homepage": "https://github.com/rpsh/subtitles-adjuster",
+  "keywords": [
+    "subtitle",
+    "srt",
+    "ass",
+    "subtitles adjust",
+    "subtitles timings adjust",
+    "subtitles timeline adjust",
+    "caption"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "ass-to-srt": "^1.2.1",
+    "jschardet": "^3.0.0",
+    "srt-parser-2": "^1.1.7",
+    "string-similarity-js": "^2.1.4",
+    "subtitle-time": "^1.0.6"
+  },
+  "devDependencies": {
+    "iconv-lite": "^0.6.3",
+    "yargs": "^15.4.1"
+  }
+}
