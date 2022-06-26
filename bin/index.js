@@ -6,7 +6,7 @@ const yargs = require('yargs');
 const iconv = require('iconv-lite');
 const jschardet = require('jschardet');
 
-const ass2srt = require('../ass-to-srt');
+const ass2srt = require('../utils/ass-to-srt');
 const subtitlesAdjuster = require('../index');
 
 const argv = yargs.argv;
@@ -16,7 +16,9 @@ const baseFileEncode = argv.e || argv.baseEncode;
 const draftFileName = path.resolve(argv.d || argv.draft);
 const draftFileEncode = argv.f || argv.draftEncode;
 const outputFilename = path.resolve(
-  argv.o || argv.output || `${(draftFileName || '').replace(/\.(srt|ass)$/, '.fixed.srt')}`,
+  argv.o ||
+    argv.output ||
+    `${(draftFileName || '').replace(/\.(srt|ass)$/, '.fixed.srt')}`
 );
 
 const supportExtname = ['.ass', '.srt'];
@@ -26,11 +28,15 @@ const draftExtname = path.extname(draftFileName);
 const unsuportFiles = getUnsupportFiles(baseExtname, draftExtname);
 
 if (!baseFileName) {
-  throw new Error('[Error] Base subtitle filename is required. Please use the -b or --base flag');
+  throw new Error(
+    '[Error] Base subtitle filename is required. Please use the -b or --base flag'
+  );
 }
 
 if (!draftFileName) {
-  throw new Error('[Error] Draft subtitle filename is required. Please use the -b or --draft flag');
+  throw new Error(
+    '[Error] Draft subtitle filename is required. Please use the -b or --draft flag'
+  );
 }
 
 if (unsuportFiles.length) {
@@ -39,7 +45,7 @@ if (unsuportFiles.length) {
 * Currently supported input file types （当前支持的字幕格式）: .ass, .srt
 
 Not Support （不支持的文件）:
-${unsuportFiles.join('\n')}`,
+${unsuportFiles.join('\n')}`
   );
 }
 
@@ -48,11 +54,11 @@ const draftFile = fs.readFileSync(draftFileName);
 
 let baseSubtitle = iconv.decode(
   baseFile,
-  baseFileEncode || jschardet.detect(baseFile).encoding || 'utf8',
+  baseFileEncode || jschardet.detect(baseFile).encoding || 'utf8'
 );
 let draftSubtitle = iconv.decode(
   draftFile,
-  draftFileEncode || jschardet.detect(draftFile).encoding || 'utf8',
+  draftFileEncode || jschardet.detect(draftFile).encoding || 'utf8'
 );
 
 if (baseExtname === '.ass') {

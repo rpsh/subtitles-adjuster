@@ -1,12 +1,14 @@
+/*
+ * @Author: rpsh myrpsh@gmail.com
+ * @Date: 2022-06-20 23:02:14
+ * @LastEditors: rpsh myrpsh@gmail.com
+ * @LastEditTime: 2022-06-26 23:56:43
+ * @FilePath: /subtitles-adjuster/ass-to-srt.js
+ * @Description: ass字幕转srt字幕
+ */
 const assToSrt = require('ass-to-srt');
 const srtParser = require('./srt-parser');
-
-// 字幕中要过滤掉的条目
-const filters = [
-  /^m\s[\d-\s]+/, // ass字幕的绘画指令
-  '最新连载海外影视剧字幕下载', // 过滤掉宣传
-  // '原创翻译',
-];
+const checkBlacklist = require('./check-blacklist');
 
 function ass2srt(data) {
   const srt = assToSrt(data);
@@ -16,7 +18,7 @@ function ass2srt(data) {
   let i = 1;
 
   subtitles.forEach((item) => {
-    if (checkFilters(item.text)) {
+    if (checkBlacklist(item.text) || !item.text) {
       return true;
     }
     result.push({
@@ -27,13 +29,6 @@ function ass2srt(data) {
   });
 
   return srtParser.toSrt(result);
-}
-
-function checkFilters(text) {
-  return filters.some((item) => {
-    const reg = new RegExp(/\/.*\//.test(item) ? item : '^' + item, 'g');
-    return reg.test(text);
-  });
 }
 
 module.exports = ass2srt;

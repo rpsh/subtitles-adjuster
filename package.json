@@ -1,6 +1,6 @@
 {
   "name": "subtitles-adjuster",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Auto adjust the timeline of bilingual subtitles with the base subtitles. (根据基准字幕自动校正中英双语字幕的时间轴)",
   "main": "index.js",
   "scripts": {},
@@ -21,13 +21,13 @@
   "license": "MIT",
   "dependencies": {
     "ass-to-srt": "^1.2.1",
+    "iconv-lite": "^0.6.3",
     "jschardet": "^3.0.0",
+    "lodash": "^4.17.21",
     "srt-parser-2": "^1.1.7",
     "string-similarity-js": "^2.1.4",
-    "subtitle-time": "^1.0.6"
-  },
-  "devDependencies": {
-    "iconv-lite": "^0.6.3",
+    "subtitle-time": "^1.0.6",
     "yargs": "^15.4.1"
-  }
+  },
+  "devDependencies": {}
 }
