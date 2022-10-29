@@ -75,6 +75,7 @@ const outputFile = subtitlesAdjuster({
 });
 
 if (outputFile) {
+  console.log('🚀 ~ file: index.js ~ line 79 ~ outputFilename', outputFilename);
   fs.writeFileSync(path.resolve(outputFilename), outputFile, 'utf8');
   log(`Completed（字幕校正完成）：
 ${outputFilename}`);
